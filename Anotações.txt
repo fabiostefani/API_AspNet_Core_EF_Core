@@ -1,0 +1,16 @@
+﻿. Instalar o EntityFramework
+	Microsoft.EntityFrameworkCore
+
+. Instalar o PostgreSQL
+	Npgsql.EntityFrameworkCore.PostgreSQL
+
+. Instalar o Migrations no .NetCore
+	Microsoft.EntityFrameworkCore.Design
+	criar o snapshot initial
+	add-migration initial >> para criar o snapshot do banco
+	update-database >> para executar a criação do banco
+	remove-migration
+	https://www.entityframeworktutorial.net/efcore/entity-framework-core-migration.aspx
+
+
+. 
