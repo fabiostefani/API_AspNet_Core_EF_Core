@@ -12,5 +12,8 @@
 	remove-migration
 	https://www.entityframeworktutorial.net/efcore/entity-framework-core-migration.aspx
 
+. Instalar o MVC
+	Microsoft.AspNetCore.Mvc
+	Depois configura no Startup o Serviço do MVC e informa o APP que tem que usar o MVC
 
 . 

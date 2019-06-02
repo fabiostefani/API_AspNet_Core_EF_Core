@@ -4,6 +4,12 @@ namespace fabiostefani.io.MapaCatalog.Api.Models
 {
     public class Product
     {
+        public Product()
+        {
+            CreateDate = DateTime.Now;
+            LastUpdateDate = DateTime.Now;
+        }
+
         public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
