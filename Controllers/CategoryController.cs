@@ -1,5 +1,6 @@
 ﻿using fabiostefani.io.MapaCatalog.Api.Data;
 using fabiostefani.io.MapaCatalog.Api.Models;
+using fabiostefani.io.MapaCatalog.Api.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -10,46 +11,38 @@ namespace fabiostefani.io.MapaCatalog.Api.Controllers
 {
     public class CategoryController : Controller
     {
-        private readonly StoreDataContext _context;
-        public CategoryController(StoreDataContext context)
+        private readonly CategoryRepository _repository;
+        public CategoryController(CategoryRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
         [Route("v1/categories")]
         [HttpGet]
         public async Task<IEnumerable<Category>>  Get()
         {
-            return await _context.Categories.AsNoTracking().ToListAsync();
-        }
-
-        [Route("v1/categories/SemAwait")]
-        [HttpGet]
-        public IEnumerable<Category> GetSemAwait()
-        {
-            return _context.Categories.AsNoTracking().ToList();
+            return await _repository.Get();
         }
 
         [Route("v1/categories/{id}")]
         [HttpGet]
-        public Category Get(int id)
+        public async Task< Category> Get(int id)
         {
-            return _context.Categories.AsNoTracking().FirstOrDefault(x => x.Id == id);
+            return await _repository.Get(id);
         }
 
         [Route("v1/categories/{id}/products")]
         [HttpGet]
         public  IEnumerable<Product> GetProducts(int id)
         {
-            return _context.Products.AsNoTracking().Where(x => x.CategoryId == id).ToList();
+            return _repository.GetProducts(id);
         }
 
         [Route("v1/categories")]
         [HttpPost]
         public Category Post([FromBody]Category category)
         {
-            _context.Categories.Add(category);
-            _context.SaveChanges();
+            _repository.Save(category);            
             return category;
         }
 
@@ -57,8 +50,7 @@ namespace fabiostefani.io.MapaCatalog.Api.Controllers
         [HttpPut]
         public Category Put([FromBody]Category category)
         {
-            _context.Entry<Category>(category).State = EntityState.Modified;
-            _context.SaveChanges();
+            _repository.Update(category);
 
             return category;
         }
@@ -67,9 +59,8 @@ namespace fabiostefani.io.MapaCatalog.Api.Controllers
         [HttpDelete]
         public Category Delete([FromBody]Category category)
         {
-            _context.Categories.Remove(category);
-            _context.SaveChanges();
-
+            _repository.Delete(category);
+            
             return category;
         }
 

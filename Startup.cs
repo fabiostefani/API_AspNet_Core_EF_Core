@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
 using Microsoft.Extensions.Configuration;
-
+using fabiostefani.io.MapaCatalog.Api.Repositories;
 
 namespace fabiostefani.io.MapaCatalog
 {
@@ -15,7 +15,10 @@ namespace fabiostefani.io.MapaCatalog
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddScoped<StoreDataContext, StoreDataContext>(); // RESOLVER A INJEÇÃO DE DEPENDÊNCIA DOS CONTROLLERS
+            services.AddScoped<StoreDataContext, StoreDataContext>(); // RESOLVER A INJEÇÃO DE DEPENDÊNCIA DOS CONTROLLERS. SCOPED: sempre retorna o mesmo se já existir
+            services.AddTransient<ProductRepository, ProductRepository>(); // RESOLVER A INJEÇÃO DE DEPENDÊNCIA DOS CONTROLLERS: Transient: sempre retorna um novo
+            services.AddTransient<CategoryRepository, CategoryRepository>();
+            
             //services.AddDbContext<StoreDataContext>(options =>
             //    options.UseNpgsql(@"Host = localhost; Port = 5432; Pooling = true; Database = MapaCatalog; User Id = postgres; Password = Postgres2018!"));
         }

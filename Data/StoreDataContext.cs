@@ -15,7 +15,7 @@ namespace fabiostefani.io.MapaCatalog.Api.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql(@"Host = localhost; Port = 5432; Pooling = true; Database = MapaCatalog; User Id = postgres; Password = Postgres2018!; ");
+            optionsBuilder.UseNpgsql(@"Host = localhost; Port = 5432; Pooling = true; Database = MapaCatalog; User Id = postgres; Password = Postgres2019!; ");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
