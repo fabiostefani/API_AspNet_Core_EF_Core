@@ -17,11 +17,27 @@ namespace fabiostefani.io.MapaCatalog.Api.Controllers
             _repository = repository;
         }
 
+        /// <summary>
+        /// Transforma uma temperatura em Fahrenheit para o equivalente
+        /// nas escalas Celsius e Kelvin.
+        /// </summary>
+        /// <param name="temperatura">Temperatura em Fahrenheit</param>
+        /// <returns>Objeto contendo valores para uma temperatura
+        /// nas escalas Fahrenheit, Celsius e Kelvin.</returns>
         [Route("v1/categories")]
+        [ResponseCache(Location = ResponseCacheLocation.Client, Duration =60)]
         [HttpGet]
         public async Task<IEnumerable<Category>>  Get()
         {
             return await _repository.Get();
+        }
+
+        [Route("v2/categories")]
+        [ResponseCache(Location = ResponseCacheLocation.Client, Duration = 60)]
+        [HttpGet]
+        public IEnumerable<Category> GetSemAwait()
+        {
+            return _repository.Get().Result;
         }
 
         [Route("v1/categories/{id}")]

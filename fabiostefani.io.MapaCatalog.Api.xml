@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>fabiostefani.io.MapaCatalog.Api</name>
+    </assembly>
+    <members>
+        <member name="M:fabiostefani.io.MapaCatalog.Api.Controllers.CategoryController.Get">
+            <summary>
+            Transforma uma temperatura em Fahrenheit para o equivalente
+            nas escalas Celsius e Kelvin.
+            </summary>
+            <param name="temperatura">Temperatura em Fahrenheit</param>
+            <returns>Objeto contendo valores para uma temperatura
+            nas escalas Fahrenheit, Celsius e Kelvin.</returns>
+        </member>
+    </members>
+</doc>

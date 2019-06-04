@@ -16,4 +16,15 @@
 	Microsoft.AspNetCore.Mvc
 	Depois configura no Startup o Serviço do MVC e informa o APP que tem que usar o MVC
 
-. 
+. Cache de Resultado
+	Colocar a anotação '[ResponseCache(Location = ResponseCacheLocation.Client, Duration =60)]' no request que deseja cachear.
+	Analisar qual request deseja cachear, nem todos são possíveis de cachear.
+	Adicionar o midleware de uso de cache no Startup ?? Se colocar no startup, todas as requisições serão cacheadas o que não seria ideal
+
+. Compressão
+	pkg Microsoft.AspNetCore.ResponseCompression
+	Adicionar o midleare de compressão no startup.
+
+. Documentação de API
+	pkg SwashBuckle.AspNetCore
+	Adicionar a configuração do Swagger no Startup
