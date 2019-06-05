@@ -2,19 +2,29 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-
 using Microsoft.Extensions.Configuration;
 using fabiostefani.io.MapaCatalog.Api.Repositories;
 using Swashbuckle.AspNetCore.Swagger;
+using System.IO;
+using fabiostefani.io.MapaCatalog.Api;
 
 namespace fabiostefani.io.MapaCatalog
 {
     public class Startup
     {
+        public static IConfiguration Configuration { get; set; }
+
         public void ConfigureServices(IServiceCollection services)
         {
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json");
+
+            Configuration = builder.Build();
+
+            //services.AddApplicationInsightsTelemetry(Configuration);
+
             services.AddMvc();
             
             //services.AddResponseCompression();
@@ -59,9 +69,11 @@ namespace fabiostefani.io.MapaCatalog
             //{
             //    o.
             //})
-            
+
             //services.AddDbContext<StoreDataContext>(options =>
             //    options.UseNpgsql(@"Host = localhost; Port = 5432; Pooling = true; Database = MapaCatalog; User Id = postgres; Password = Postgres2018!"));
+
+            Settings.ConnectionString = $"{Configuration["connectionString"]}";
         }
 
         //private static string GetXmlCommentsPath()
